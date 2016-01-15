@@ -11,7 +11,7 @@ class TestComponent extends Component{
 	public $titulo;
         public $content;
         
-        public static $contador;
+        private $contador;
 
         const EVENT_CLICKONLIST = 'handler1';
         
@@ -19,7 +19,7 @@ class TestComponent extends Component{
             parent::init();
             $this->titulo= '<b>Esto es un componente Yii2</b>';
             
-            self::$contador = 5;
+            $this->contador = 0;
             
             $this->on(self::EVENT_CLICKONLIST, [$this, 'handler1']);
             $this->on(self::EVENT_CLICKONLIST, [$this, 'hadler2']);
@@ -49,7 +49,7 @@ class TestComponent extends Component{
                 'clientEvents' => [
                     //'stop' => 'function (event, ui) { alert("event change occured."); }',
                     'slide' => 'function(event, ui) {$("#amount_animate").val(ui.value);}',
-                    'change' => 'function (event, ui) { }'
+                    'change' => 'function (event, ui) { var llamadas = val(ui.value);}'
                 ],
             ]);
  
@@ -57,9 +57,9 @@ class TestComponent extends Component{
                     $this->content= $this->titulo. "<br>".'Sin parámetros';
             }
             else{
-                $this->content= $this->titulo. "<br>".$content."<br>Llamadas al handler1 = ".self::$contador;
+               $this->content= $this->titulo;//. "<br>".$content."<br>Llamadas al handler1 = ".$this->contador;
             }
-                      
+                                  
             $html = <<<HTML
 <div align="center" style="width: 400px; height: 200px; border-style: solid; border-color: blue; " name="marcotest">
 <p>$this->content</p>
@@ -88,9 +88,9 @@ HTML;
 
         
         public function handler1($event){
-            self::$contador +=1;
+            $this->contador +=1;
             echo "Hadler 1: Contador aumentado ";
-            echo self::$contador,"<br>";
+            echo $this->contador,"<br>";
         }
         
         public function hadler2($event){
@@ -100,26 +100,9 @@ HTML;
         }
 
 }
-class disparador extends Component{
-    private $html;
-    
-    function renderiza() {
-        $script = '$this->trigger(\app\components\TestComponent::EVENT_CLICKONLIST)';
-        ?>
-        <form action="<?php echo $script; ?>" method="post">
-            <input type="submit" name="triggerBtn">
-        </form>
-        <?php
-        echo $this->html;
-    }
-    
-}
 
-$disp = new disparador();
-$disp->renderiza();
 
 ?>
-
 
 
 
