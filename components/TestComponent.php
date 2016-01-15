@@ -7,12 +7,14 @@ use yii\base\Event;
 use yii\jui\DatePicker;
 use yii\jui\Slider;
 
+
 class TestComponent extends Component{
 	public $titulo;
         public $content;
         
         private $contador;
-
+        private $llamadas = 0;
+        
         const EVENT_CLICKONLIST = 'handler1';
         
         public function init(){
@@ -29,7 +31,9 @@ class TestComponent extends Component{
         }
 	
 	public function display($content=null){
-                   
+            
+            echo "<script> var llamadas = 0;</script>";
+            
             $sld = Slider::widget([
                 
                 'options'=>array(
@@ -49,10 +53,20 @@ class TestComponent extends Component{
                 'clientEvents' => [
                     //'stop' => 'function (event, ui) { alert("event change occured."); }',
                     'slide' => 'function(event, ui) {$("#amount_animate").val(ui.value);}',
-                    'change' => 'function (event, ui) { var llamadas = val(ui.value);}'
+                    'change' => 'function (event, ui) { llamadas += 1;}'
                 ],
             ]);
- 
+                        
+            $this->llamadas = "<script> document.write(llamadas)</script>";
+            echo "Llamadas = ", $this->llamadas;
+            if($this->llamadas == 3)
+            {
+                $message = "Mensaje de evento";
+                $event = new Event;
+                //$event->message = $message;
+                $this->trigger(self::EVENT_CLICKONLIST, $event);
+            }
+            
             if($content===null){
                     $this->content= $this->titulo. "<br>".'Sin parámetros';
             }
@@ -63,7 +77,7 @@ class TestComponent extends Component{
             $html = <<<HTML
 <div align="center" style="width: 400px; height: 200px; border-style: solid; border-color: blue; " name="marcotest">
 <p>$this->content</p>
-
+Llamadas= <input type="text" id="llamadas_input" style="border:0; color:#f6931f; font-weight:bold;" value="0" />
 <div style="width: 80%;">
 Valor: <input type="text" id="amount_animate" style="border:0; color:#f6931f; font-weight:bold;" value="0" />                                                               
 $sld                    
@@ -72,18 +86,14 @@ $sld
 HTML;
                 
 		echo $html;
-                echo DatePicker::widget([
-                    'name'  => 'from_date',
-                    'value'  => '2015-09-30',
-                    'language' => 'es',
-                    'dateFormat' => 'dd-MM-yyyy',
-                ]);
+//                echo DatePicker::widget([
+//                    'name'  => 'from_date',
+//                    'value'  => '2015-09-30',
+//                    'language' => 'es',
+//                    'dateFormat' => 'dd-MM-yyyy',
+//                ]);
                 
                 //echo Html::encode($this->content);
-                $message = "Mensaje de evento";
-                $event = new Event;
-                //$event->message = $message;
-                $this->trigger(self::EVENT_CLICKONLIST, $event);
 	}
 
         
@@ -91,6 +101,7 @@ HTML;
             $this->contador +=1;
             echo "Hadler 1: Contador aumentado ";
             echo $this->contador,"<br>";
+            echo '<script>$("#llamadas_input").llamadas;</script>';
         }
         
         public function hadler2($event){
@@ -103,7 +114,6 @@ HTML;
 
 
 ?>
-
 
 
 

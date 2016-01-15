@@ -26,10 +26,9 @@ $this->params['breadcrumbs'][] = $this->title;
         echo $salida;
      
         //Yii::$app->test->display('Hola Mundo!!!');
-                   
+        //$this->trigger(\app\components\TestComponent::EVENT_CLICKONLIST);           
 //        echo "<pre>";
 //        var_dump($balance);
 //        echo "</pre>";
     ?>
-    <?php $this->trigger(\app\components\TestComponent::EVENT_CLICKONLIST); ?>
 </div>

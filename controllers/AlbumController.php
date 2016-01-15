@@ -13,14 +13,14 @@ class AlbumController extends \yii\web\Controller {
     public function actionLista() {
         $model = new Album;
         $discos = \app\models\Lista::find()->all();
-        $resultado = "<ul>";
+        $html = "<ul>";
         foreach ($discos as $key => $disco) {
             //echo $key, " -> ", $disco->id, " - ", $disco->titulo, " - ", $disco->anyo, "<br>";
-            $resultado .= "<li>" . $disco->id . " - " . $disco->titulo . " - " . $disco->anyo . "</li>";
+            $html .= "<li>" . $disco->id . " - " . $disco->titulo . " - " . $disco->anyo . "</li>";
         }
-        $resultado .= "</ul>";
-        
-        return $this->render('lista', ["tabla" => $resultado]);
+        $html .= "</ul>";
+        //$this->trigger(\app\components\TestComponent::EVENT_CLICKONLIST);
+        return $this->render('lista', ["tabla" =>$html]);
     }
 
 }
