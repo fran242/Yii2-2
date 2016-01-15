@@ -14,6 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div>
     <h1><?= Html::encode($this->title) ?></h1>
+    
     <?php
         $salida = "<ul>";
         foreach ($balance as $key => $value) {
@@ -23,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         
         echo $salida;
      
-        Yii::$app->test->display('Hola Mundo!!!');
+        //Yii::$app->test->display('Hola Mundo!!!');
                    
 //        echo "<pre>";
 //        var_dump($balance);

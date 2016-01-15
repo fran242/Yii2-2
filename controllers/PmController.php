@@ -10,8 +10,6 @@
     }
     
         public function actionBalance(){
-            $this->trigger(\app\components\TestComponent::EVENT_CLICKONLIST);
-            
             $model = new Pm;
             $balance = $model->balance();
             

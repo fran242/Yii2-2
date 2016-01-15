@@ -94,7 +94,7 @@ HTML;
         
         public function hadler2($event){
             echo "Handler 2: No hace nada<br>";
-            //echo "<script type=\"text/javascript\">alert(\"Llamada a handler2\");</script>";
+            echo "<script type=\"text/javascript\">alert(\"Llamada a handler2\");</script>";
             
         }
 
