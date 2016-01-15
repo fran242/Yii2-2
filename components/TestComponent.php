@@ -11,7 +11,7 @@ class TestComponent extends Component{
 	public $titulo;
         public $content;
         
-        private static $contador;
+        public static $contador;
 
         const EVENT_CLICKONLIST = 'handler1';
         
@@ -29,11 +29,7 @@ class TestComponent extends Component{
         }
 	
 	public function display($content=null){
-            $message = "Mensaje de evento";
-            $event = new Event;
-            //$event->message = $message;
-            $this->trigger(self::EVENT_CLICKONLIST, $event);
-        
+                   
             $sld = Slider::widget([
                 
                 'options'=>array(
@@ -82,14 +78,19 @@ HTML;
                     'language' => 'es',
                     'dateFormat' => 'dd-MM-yyyy',
                 ]);
+                
                 //echo Html::encode($this->content);
+                $message = "Mensaje de evento";
+                $event = new Event;
+                //$event->message = $message;
+                $this->trigger(self::EVENT_CLICKONLIST, $event);
 	}
 
         
         public function handler1($event){
             self::$contador +=1;
+            echo "Hadler 1: Contador aumentado ";
             echo self::$contador,"<br>";
-            echo "Hadler 1: Contador aumentado<br>";
         }
         
         public function hadler2($event){
@@ -98,10 +99,28 @@ HTML;
             
         }
 
-
-
 }
+class disparador extends Component{
+    private $html;
+    
+    function renderiza() {
+        $script = '$this->trigger(\app\components\TestComponent::EVENT_CLICKONLIST)';
+        ?>
+        <form action="<?php echo $script; ?>" method="post">
+            <input type="submit" name="triggerBtn">
+        </form>
+        <?php
+        echo $this->html;
+    }
+    
+}
+
+$disp = new disparador();
+$disp->renderiza();
+
 ?>
+
+
 
 
 

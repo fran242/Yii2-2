@@ -1,6 +1,8 @@
 <?php
 
 use yii\helpers\Html;
+use yii\base\Event;
+use app\components\TestComponent;
 
 //use yii\base\Component;
 //use yii\base\Event;
@@ -14,7 +16,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div>
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php $this->trigger(\app\components\TestComponent::EVENT_CLICKONLIST); ?>
     <?php
         $salida = "<ul>";
         foreach ($balance as $key => $value) {
@@ -30,4 +31,5 @@ $this->params['breadcrumbs'][] = $this->title;
 //        var_dump($balance);
 //        echo "</pre>";
     ?>
+    <?php $this->trigger(\app\components\TestComponent::EVENT_CLICKONLIST); ?>
 </div>
