@@ -28,5 +28,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php 
             Yii::$app->test->display('Hola Mundo!!!');
     ?>
+    
+    <?php 
+            // Yii::$app->usuarios->
+    ?>
 
 </div>

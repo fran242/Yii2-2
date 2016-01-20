@@ -1,7 +1,7 @@
 <?php
 
 namespace app\controllers;
-use app\models\Album;
+use app\models\Usuarios;
 
 class AlbumController extends \yii\web\Controller {
 
@@ -11,7 +11,7 @@ class AlbumController extends \yii\web\Controller {
     }
 
     public function actionLista() {
-        $model = new Album;
+        $model = new Usuarios;
         $discos = \app\models\Lista::find()->all();
         $html = "<ul>";
         foreach ($discos as $key => $disco) {

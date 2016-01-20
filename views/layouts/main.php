@@ -39,7 +39,7 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Lista', 'url' => ['/album/lista']],
+            ['label' => 'Usuarios', 'url' => ['/users/index']],
             ['label' => 'PerfectMoney', 'url' => ['/pm/balance']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],

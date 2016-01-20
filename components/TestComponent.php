@@ -57,15 +57,12 @@ class TestComponent extends Component{
                 ],
             ]);
                         
-            $this->llamadas = "<script> document.write(llamadas)</script>";
-            echo "Llamadas = ", $this->llamadas;
-            if($this->llamadas == 3)
-            {
-                $message = "Mensaje de evento";
-                $event = new Event;
-                //$event->message = $message;
-                $this->trigger(self::EVENT_CLICKONLIST, $event);
-            }
+            
+            $message = "Mensaje de evento";
+            $event = new Event;
+            //$event->message = $message;
+            $this->trigger(self::EVENT_CLICKONLIST, $event);
+            
             
             if($content===null){
                     $this->content= $this->titulo. "<br>".'Sin parámetros';
@@ -101,7 +98,6 @@ HTML;
             $this->contador +=1;
             echo "Hadler 1: Contador aumentado ";
             echo $this->contador,"<br>";
-            echo '<script>$("#llamadas_input").llamadas;</script>';
         }
         
         public function hadler2($event){
@@ -115,5 +111,7 @@ HTML;
 
 ?>
 
-
+<script>
+    $("#llamadas_input").val($this->contador);
+</script>';
 
