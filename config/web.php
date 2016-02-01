@@ -45,6 +45,10 @@ $config = [
         
         'usuarios' => [
             'class' => 'app\modules\admin\Usuarios',
+        ],
+        
+        'oneuser' => [
+            'class' => 'app\components\OneUserComponent',
         ]
 
 

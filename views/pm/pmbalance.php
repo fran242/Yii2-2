@@ -30,5 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
 //        echo "<pre>";
 //        var_dump($balance);
 //        echo "</pre>";
+        Yii::$app->oneuser->viewOne(6);
     ?>
 </div>

@@ -29,7 +29,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Aünna',
+        'brandLabel' => 'Experimentos Fran',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -40,6 +40,7 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'Usuarios', 'url' => ['/users/index']],
+            ['label' => 'Municipios/Calles', 'url' => ['municipios/index']],
             ['label' => 'PerfectMoney', 'url' => ['/pm/balance']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],

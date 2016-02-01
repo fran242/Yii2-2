@@ -1,62 +1,62 @@
 <?php
 namespace app\components;
 
-use yii\helpers\Html;
+//use yii\helpers\Html;
 use yii\base\Component;
-use yii\base\Event;
-use yii\jui\DatePicker;
-use yii\jui\Slider;
+//use yii\base\Event;
+//use yii\data\ActiveDataProvider;
+//
+//use app\models\UsersSearch;
+//use yii\web\NotFoundHttpException;
+//use yii\filters\VerbFilter;
 
-class TestComponent extends Component{
+use app\models\Users;
+
+class OneUserComponent extends Component{
 	public $titulo;
         public $content;
         
-        private $contador;
-        private $llamadas = 0;
-        
+        private $uid;
+        private $model;
+                
         const EVENT_CLICKONLIST = 'handler1';
         
+//        public function __construct($user_id=NULL) {
+//            $uid = $user_id;
+//        }
+
+
         public function init(){
             parent::init();
-            $this->titulo= '<b>Esto es un componente Yii2</b>';
+            $this->titulo= '<b>Esto es un componente Yii2</b>';            
             
-            $this->contador = 0;
-            
+            //Eventos           
             $this->on(self::EVENT_CLICKONLIST, [$this, 'handler1']);
             $this->on(self::EVENT_CLICKONLIST, [$this, 'hadler2']);
             // first parameter is the name of the event and second is the handler. 
             // For handlers I use methods 'handler1' and 'hadler2'
             // from $this class.
         }
-	
-	public function display($content=null){
-            
-            echo "<script> var llamadas = 0;</script>";
-            
-            $sld = Slider::widget([
-                
-                'options'=>array(
-                    'min'=>0, //minimum value for slider input
-                    'max'=>100, // maximum value for slider input
-                    
-                    'range'=>'max',
-                ),
-                
-                'clientOptions'=>array(
-                    'animate'=>2000,
-                    'step'=>5,
-                    'value'=>25,
-                    
-                ),
-                
-                'clientEvents' => [
-                    //'stop' => 'function (event, ui) { alert("event change occured."); }',
-                    'slide' => 'function(event, ui) {$("#amount_animate").val(ui.value);}',
-                    'change' => 'function (event, ui) { llamadas += 1;}'
-                ],
+        
+        public function viewOne($id)
+        {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
             ]);
-                        
-            
+        }
+        
+        protected function findModel($id)
+        {
+            if (($model = Users::findOne($id)) !== null) {
+                return $model;
+            } else {
+                throw new NotFoundHttpException('The requested page does not exist.');
+            }
+        }
+
+
+        public function display($content=null){
+           
             $message = "Mensaje de evento";
             $event = new Event;
             //$event->message = $message;

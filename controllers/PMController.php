@@ -7,7 +7,7 @@
        public function actionIndex() {
         $mensaje = "<p>Esta clase realiza acciones en la cuenta de Perfect Money</p>";
         return $this->render('lista', ["tabla" => $mensaje]);
-    }
+        }
     
         public function actionBalance(){
             $model = new PerfectMoney;
